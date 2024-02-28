@@ -172,7 +172,7 @@ public class slenderAIRevamped : MonoBehaviour
         this.transform.LookAt(new Vector3(player.position.x, this.transform.position.y, player.position.z));
 
         aiDistance = Vector3.Distance(this.transform.position, player.position);
-        Debug.Log(aiDistance);
+        // Debug.Log(aiDistance);
 
         if (playerHealth <= 0)
         {
