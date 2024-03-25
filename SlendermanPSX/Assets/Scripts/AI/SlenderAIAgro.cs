@@ -25,9 +25,9 @@ public class SlenderAIAgro : MonoBehaviour
 
     public Slider healthSlider;
 
-    public GameObject player;
+    // public GameObject player;
 
-    public Transform slenderMainTransform;
+    public Transform slenderMainTransform, playerTransform;
 
     public GameObject jumpscareCam;
     
@@ -152,7 +152,7 @@ public class SlenderAIAgro : MonoBehaviour
             //     resetSlender();
             //     token3 = 1;
             // }
-            dest = player.transform.position;
+            dest = playerTransform.position;
             // token4 = 0;
             ai.destination = dest;
             staticAmount -= staticDecreaseRate * Time.deltaTime;
@@ -180,9 +180,9 @@ public class SlenderAIAgro : MonoBehaviour
         staticOpacity.a = staticAmount;
         staticscreen.color = staticOpacity;
 
-        this.transform.LookAt(new Vector3(player.transform.position.x, this.transform.position.y, player.transform.position.z));
+        this.transform.LookAt(new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z));
 
-        aiDistance = Vector3.Distance(this.transform.position, player.transform.position);
+        aiDistance = Vector3.Distance(this.transform.position, playerTransform.position);
         // Debug.Log(aiDistance);
 
         if (playerHealth <= 0)
@@ -198,7 +198,7 @@ public class SlenderAIAgro : MonoBehaviour
             {
                 staticAmount = 0.9f;
             }
-            player.gameObject.SetActive(false);
+            playerTransform.gameObject.SetActive(false);
             jumpscareCam.SetActive(true);
             ai.speed = 0;
             ai.SetDestination(transform.position);

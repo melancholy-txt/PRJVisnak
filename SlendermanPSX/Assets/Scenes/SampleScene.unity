@@ -1158,10 +1158,10 @@ MonoBehaviour:
   healthIncreaseRate: 10
   healthDecreaseRate: 20
   catchDistance: 3
-  playerHealth: 100
-  healthSlider: {fileID: 1036560035}
-  player: {fileID: 981443587}
+  playerHealth: 0
+  healthSlider: {fileID: 0}
   slenderMainTransform: {fileID: 167553367}
+  playerTransform: {fileID: 0}
   jumpscareCam: {fileID: 1978101288}
   blackscreen: {fileID: 173699289}
   usingHealthSlider: 1
@@ -2080,13 +2080,13 @@ MonoBehaviour:
   staticDecreaseRate: 0.15
   soundIncreaseRate: 0.3
   soundDecreaseRate: 0.15
-  healthIncreaseRate: 10
+  healthIncreaseRate: 0
   healthDecreaseRate: 20
   catchDistance: 3
   playerHealth: 100
   healthSlider: {fileID: 1036560035}
-  player: {fileID: 981443587}
   slenderMainTransform: {fileID: 368919343}
+  playerTransform: {fileID: 981443587}
   jumpscareCam: {fileID: 2029563192}
   blackscreen: {fileID: 173699289}
   usingHealthSlider: 1
@@ -3464,7 +3464,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5667,8 +5667,8 @@ MonoBehaviour:
   catchDistance: 3
   playerHealth: 100
   healthSlider: {fileID: 1036560035}
-  player: {fileID: 981443587}
   slenderMainTransform: {fileID: 1025033405}
+  playerTransform: {fileID: 0}
   jumpscareCam: {fileID: 2029563192}
   blackscreen: {fileID: 173699289}
   usingHealthSlider: 1
@@ -7822,10 +7822,10 @@ MonoBehaviour:
   healthIncreaseRate: 10
   healthDecreaseRate: 20
   catchDistance: 3
-  playerHealth: 100
-  healthSlider: {fileID: 1036560035}
-  player: {fileID: 981443587}
+  playerHealth: 0
+  healthSlider: {fileID: 0}
   slenderMainTransform: {fileID: 1010010734620265550}
+  playerTransform: {fileID: 0}
   jumpscareCam: {fileID: 2029563192}
   blackscreen: {fileID: 173699289}
   usingHealthSlider: 1
