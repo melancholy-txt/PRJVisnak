@@ -94,10 +94,10 @@ public class SlenderAI : MonoBehaviour
 
     IEnumerator KillPlayer()
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(2.5f);
         blackscreen.SetActive(true);
         AudioListener.pause = true;
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(1f);
         if (enableCursorAfterDeath == true)
         {
             Cursor.visible = true;
@@ -138,9 +138,9 @@ public class SlenderAI : MonoBehaviour
                 {
                     staticVolume = 1;
                 }
-                if (staticAmount > 0.9f)
+                if (staticAmount > 0.7f)
                 {
-                    staticAmount = 0.9f;
+                    staticAmount = 0.7f;
                 }
             }
         }
@@ -192,20 +192,23 @@ public class SlenderAI : MonoBehaviour
         if (playerHealth <= 0)
         {
             StartCoroutine(KillPlayer());
-            staticVolume += soundIncreaseRate * Time.deltaTime;
-            staticAmount += staticIncreaseRate * Time.deltaTime;
-            if (staticVolume > 1)
-            {
-                staticVolume = 1;
-            }
-            if (staticAmount > 0.9f)
-            {
-                staticAmount = 0.9f;
-            }
+            // staticVolume += soundIncreaseRate * Time.deltaTime;
+            // staticAmount += staticIncreaseRate * Time.deltaTime;
+            // if (staticVolume > 1)
+            // {
+            //     staticVolume = 1;
+            // }
+            // if (staticAmount > 0.9f)
+            // {
+            //     staticAmount = 0.9f;
+            // }
+            staticAmount = 0;
+            staticOpacity.a = 0;
             playerTransform.gameObject.SetActive(false);
             jumpscareCam.SetActive(true);
             ai.speed = 0;
             ai.SetDestination(transform.position);
+            slenderAnim.Play("Scream");
         }
         if (aiDistance <= catchDistance)
         {
