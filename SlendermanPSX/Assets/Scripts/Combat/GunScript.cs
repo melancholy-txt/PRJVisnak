@@ -14,8 +14,9 @@ public class GunScript : MonoBehaviour
     //reference
     public Camera fpsCam;
     public ParticleSystem muzzleflash;
-    public GameObject impactEffectSurface, impactEffectEnemy;
+    public GameObject impactEffectSurface, impactEffectEnemy, player;
     public AudioSource shootSound, reloadSound, cockingSound;
+
 
      private void Awake()
     {
@@ -75,6 +76,10 @@ public class GunScript : MonoBehaviour
             cockingSound.Play();
             Invoke(nameof(Shoot), timeBetweenShots);
         }
+        //push player back a small amount
+        player.transform.position -= player.transform.forward * 0.1f;
+
+        
     }
 
     private void ResetShot()

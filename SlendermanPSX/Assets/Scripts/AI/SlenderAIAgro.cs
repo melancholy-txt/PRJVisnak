@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SlenderAI : MonoBehaviour
+public class SlenderAIAgro : MonoBehaviour
 {
     public NavMeshAgent ai;
 
@@ -25,9 +25,9 @@ public class SlenderAI : MonoBehaviour
 
     public Slider healthSlider;
 
-    // public FPSController playerScript;
+    public GameObject player;
 
-    public Transform slenderMainTransform, playerTransform;
+    public Transform slenderMainTransform;
 
     public GameObject jumpscareCam;
     
@@ -68,21 +68,17 @@ public class SlenderAI : MonoBehaviour
     public Camera playerCam;
     public GameObject slender2;
     public Animator slenderAnim;
-    
 
-    // private GameObject player;
-    
 
     void Start()
     {
         AudioListener.pause = false; 
-        // playerScript = GameObject.Find("Player").GetComponent<FPSController>();
-        // playerHealth = playerScript.playerHealth;
         // playerHealth = player.GetComponent<FPSController>().playerHealth;
         // player.SetActive(true);
+
     }
 
-    void ResetSlender()
+    void resetSlender()
     {
         teleportChance = Random.Range(0, 3);
         if (teleportChance != 0)
@@ -110,54 +106,54 @@ public class SlenderAI : MonoBehaviour
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(playerCam);
 
-        if (GeometryUtility.TestPlanesAABB(planes, slenderMesh.bounds) && playerHealth > 0)
-        {
-            ai.enabled = false;
-            ai.speed = 0;
-            slenderAnim.ResetTrigger("moving");
-            slenderAnim.SetTrigger("idle");
+        // if (GeometryUtility.TestPlanesAABB(planes, slenderMesh.bounds) && playerHealth > 0)
+        // {
+        //     ai.enabled = false;
+        //     ai.speed = 0;
+        //     slenderAnim.ResetTrigger("walking");
+        //     slenderAnim.SetTrigger("idle");
 
-            ai.SetDestination(transform.position);
-            if (raycastScript.detected == true)
-            {
-                token3 = 0;
-                if (token4 == 0)
-                {
-                    randNum2 = Random.Range(0, 2);
-                    if (randNum2 == 0)
-                    {
-                        jumpscareSound.Play();
-                    }
-                    token4 = 1;
-                }
-                slenderMainTransform.position = slenderMainTransform.position;
-                staticVolume += soundIncreaseRate * Time.deltaTime;
-                staticAmount += staticIncreaseRate * Time.deltaTime;
-                playerHealth -= healthDecreaseRate * Time.deltaTime;
-                if (staticVolume > 1)
-                {
-                    staticVolume = 1;
-                }
-                if (staticAmount > 0.9f)
-                {
-                    staticAmount = 0.9f;
-                }
-            }
-        }
+        //     ai.SetDestination(transform.position);
+        //     if (raycastScript.detected == true)
+        //     {
+        //         token3 = 0;
+        //         if (token4 == 0)
+        //         {
+        //             randNum2 = Random.Range(0, 2);
+        //             if (randNum2 == 0)
+        //             {
+        //                 jumpscareSound.Play();
+        //             }
+        //             token4 = 1;
+        //         }
+        //         slenderMainTransform.position = slenderMainTransform.position;
+        //         staticVolume += soundIncreaseRate * Time.deltaTime;
+        //         staticAmount += staticIncreaseRate * Time.deltaTime;
+        //         playerHealth -= healthDecreaseRate * Time.deltaTime;
+        //         if (staticVolume > 1)
+        //         {
+        //             staticVolume = 1;
+        //         }
+        //         if (staticAmount > 0.9f)
+        //         {
+        //             staticAmount = 0.9f;
+        //         }
+        //     }
+        // }
 
-        if (!GeometryUtility.TestPlanesAABB(planes, slenderMesh.bounds) && playerHealth > 0 || raycastScript.detected == false && playerHealth > 0)
-        {
+        // if (!GeometryUtility.TestPlanesAABB(planes, slenderMesh.bounds) && playerHealth > 0 || raycastScript.detected == false && playerHealth > 0)
+        // {
             ai.speed = m_speed;
             ai.enabled = true;
             slenderAnim.ResetTrigger("idle");
             slenderAnim.SetTrigger("moving");
-            if (token3 == 0)
-            {
-                ResetSlender();
-                token3 = 1;
-            }
-            dest = playerTransform.position;
-            token4 = 0;
+            // if (token3 == 0)
+            // {
+            //     resetSlender();
+            //     token3 = 1;
+            // }
+            dest = player.transform.position;
+            // token4 = 0;
             ai.destination = dest;
             staticAmount -= staticDecreaseRate * Time.deltaTime;
             staticVolume -= soundDecreaseRate * Time.deltaTime;
@@ -174,7 +170,7 @@ public class SlenderAI : MonoBehaviour
             {
                 playerHealth = 100;
             }
-        }
+        // }
 
         if (usingHealthSlider == true)
         {
@@ -184,9 +180,9 @@ public class SlenderAI : MonoBehaviour
         staticOpacity.a = staticAmount;
         staticscreen.color = staticOpacity;
 
-        this.transform.LookAt(new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z));
+        this.transform.LookAt(new Vector3(player.transform.position.x, this.transform.position.y, player.transform.position.z));
 
-        aiDistance = Vector3.Distance(this.transform.position, playerTransform.position);
+        aiDistance = Vector3.Distance(this.transform.position, player.transform.position);
         // Debug.Log(aiDistance);
 
         if (playerHealth <= 0)
@@ -202,7 +198,7 @@ public class SlenderAI : MonoBehaviour
             {
                 staticAmount = 0.9f;
             }
-            playerTransform.gameObject.SetActive(false);
+            player.gameObject.SetActive(false);
             jumpscareCam.SetActive(true);
             ai.speed = 0;
             ai.SetDestination(transform.position);

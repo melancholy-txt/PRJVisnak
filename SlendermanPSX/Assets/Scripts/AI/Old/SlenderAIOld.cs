@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlenderAI : MonoBehaviour
+public class SlenderAIOld : MonoBehaviour
 {
     public Transform dest1, dest2, dest3, player;
     bool teleporting = true;
