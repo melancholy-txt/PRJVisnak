@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SlenderAIAgro : MonoBehaviour
 {
+    public Rigidbody playerRb;
     public NavMeshAgent ai;
 
     public SkinnedMeshRenderer slenderMesh;
@@ -68,6 +69,7 @@ public class SlenderAIAgro : MonoBehaviour
     public Camera playerCam;
     public GameObject slender2;
     public Animator slenderAnim;
+    public bool attackRunning = false;
 
 
     void Start()
@@ -143,29 +145,14 @@ public class SlenderAIAgro : MonoBehaviour
 
         // if (!GeometryUtility.TestPlanesAABB(planes, slenderMesh.bounds) && playerHealth > 0 || raycastScript.detected == false && playerHealth > 0)
         // {
-            ai.speed = m_speed;
+            if (aiDistance > catchDistance)
+                ai.speed = m_speed;
             ai.enabled = true;
             slenderAnim.ResetTrigger("idle");
             slenderAnim.SetTrigger("moving");
-            // if (token3 == 0)
-            // {
-            //     resetSlender();
-            //     token3 = 1;
-            // }
+
             dest = playerTransform.position;
-            // token4 = 0;
             ai.destination = dest;
-            staticAmount -= staticDecreaseRate * Time.deltaTime;
-            staticVolume -= soundDecreaseRate * Time.deltaTime;
-            playerHealth += healthIncreaseRate * Time.deltaTime;
-            if (staticVolume < 0)
-            {
-                staticVolume = 0;
-            }
-            if (staticAmount < 0)
-            {
-                staticAmount = 0;
-            }
             if (playerHealth > 100)
             {
                 playerHealth = 100;
@@ -180,7 +167,7 @@ public class SlenderAIAgro : MonoBehaviour
         staticOpacity.a = staticAmount;
         staticscreen.color = staticOpacity;
 
-        this.transform.LookAt(new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z));
+        transform.LookAt(new Vector3(playerTransform.position.x, this.transform.position.y, playerTransform.position.z));
 
         aiDistance = Vector3.Distance(this.transform.position, playerTransform.position);
         // Debug.Log(aiDistance);
@@ -205,12 +192,41 @@ public class SlenderAIAgro : MonoBehaviour
         }
         if (aiDistance <= catchDistance)
         {
-            if (token == 0)
-            {
-                playerHealth = 0;
-                token = 1;
-            }
+            if(!attackRunning)
+                StartCoroutine(AttackPlayer0());
+
+
+            // slenderAnim.Play("Attack 0");
+            // ai.speed = 0;
+            // new WaitForSeconds(3.5f);
+            // playerHealth -= 1;
+            // slenderAnim.Play("Run");
+            // if (token == 0)
+            // {
+            //     playerHealth = 0;
+            //     token = 1;
+            // }
         }
+    }
+    IEnumerator AttackPlayer0()
+    {
+        attackRunning = true;
+        ai.enabled = false;
+        // ai.speed = 0;
+        slenderAnim.Play("Attack 0");
+        yield return new WaitForSeconds(1.5f);
+        if (Vector3.Distance(transform.position, playerTransform.position) <= catchDistance)
+        {
+            playerHealth -= 10;
+            // playerTransform.position -= playerTransform.forward * 0.1f;
+            // playerTransform.position += playerTransform.up * 0.5f;
+            // playerRb.AddForce(-playerTransform.forward * 1000);
+            // playerRb.AddForce(playerTransform.up * 1000);
+
+        }
+        ai.enabled = true;
+        ai.speed = m_speed;
+        attackRunning = false;
     }
 
 

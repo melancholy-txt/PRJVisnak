@@ -78,6 +78,9 @@ public class GunScript : MonoBehaviour
         }
         //push player back a small amount
         player.transform.position -= player.transform.forward * 0.1f;
+        // player.transform.position += player.transform.up * 0.5f;
+
+
 
         
     }
