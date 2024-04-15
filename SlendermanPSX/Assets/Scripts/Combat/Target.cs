@@ -1,13 +1,16 @@
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
-    public float health = 50f;
+    public float health = 100f;
+    public Slider slider;
 
     public void TakeDamage(float amount)
     {
         health -= amount;
+        slider.value = health;
         if(health <= 0f)
         {
             Die();

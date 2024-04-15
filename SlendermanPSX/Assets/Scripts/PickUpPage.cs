@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PickUpPage : MonoBehaviour
 {
-    public GameObject collectTextObj, intText, slender1, slender2;
+    public GameObject collectTextObj, intText, slender1, slender2, slenderSlider;
     public AudioSource pickupSound, ambienceLayer1, ambienceLayer2, ambienceLayer3, ambienceLayer4, ambienceLayer5, ambienceLayer6, ambienceLayer7, ambienceLayer8;
     public bool canInteract;
     public static int pagesCollected;
@@ -59,6 +59,7 @@ public class PickUpPage : MonoBehaviour
                         ambienceLayer8.Play(); 
                         slender1.SetActive(false);
                         slender2.SetActive(true);
+                        slenderSlider.SetActive(true);
                         break;                   
                 }
                 intText.SetActive(false);

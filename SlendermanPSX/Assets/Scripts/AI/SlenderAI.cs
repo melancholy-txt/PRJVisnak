@@ -11,17 +11,7 @@ public class SlenderAI : MonoBehaviour
 
     public SkinnedMeshRenderer slenderMesh;
 
-    public float m_speed;
-
-    public float staticIncreaseRate, staticDecreaseRate;
-
-    public float soundIncreaseRate, soundDecreaseRate;
-
-    public float healthIncreaseRate, healthDecreaseRate;
-    
-    public float catchDistance;
-
-    public float playerHealth = 100;
+    public float m_speed, staticIncreaseRate, staticDecreaseRate, soundIncreaseRate, soundDecreaseRate, healthIncreaseRate, healthDecreaseRate, catchDistance, playerHealth = 100;
 
     public Slider healthSlider;
 
@@ -29,9 +19,7 @@ public class SlenderAI : MonoBehaviour
 
     public Transform slenderMainTransform, playerTransform;
 
-    public GameObject jumpscareCam;
-    
-    public GameObject blackscreen;
+    public GameObject jumpscareCam, blackscreen;
 
     Vector3 dest;
 
@@ -41,9 +29,7 @@ public class SlenderAI : MonoBehaviour
 
     int token, token3, token4;
 
-    public bool usingHealthSlider;
-
-    public bool enableCursorAfterDeath;
+    public bool usingHealthSlider, enableCursorAfterDeath;
     
     public string scenename;
 
@@ -61,9 +47,7 @@ public class SlenderAI : MonoBehaviour
 
     public Color staticOpacity;
 
-    public AudioSource staticSound;
-
-    public AudioSource jumpscareSound;
+    public AudioSource staticSound, jumpscareSound;
 
     public Camera playerCam;
     public GameObject slender2;
