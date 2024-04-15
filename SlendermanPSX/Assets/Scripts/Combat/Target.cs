@@ -18,5 +18,13 @@ public class Target : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void Knockback(Vector3 direction, float force)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        // rb.AddForce(1000 * force * direction);
+        for(int i = 0; i < 10000; i++)
+            transform.position += direction * force / 10000;
+    }
    
 }

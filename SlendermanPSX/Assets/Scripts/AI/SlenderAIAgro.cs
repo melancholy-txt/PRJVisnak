@@ -12,27 +12,17 @@ public class SlenderAIAgro : MonoBehaviour
 
     public SkinnedMeshRenderer slenderMesh;
 
-    public float m_speed;
-
-    public float staticIncreaseRate, staticDecreaseRate;
-
-    public float soundIncreaseRate, soundDecreaseRate;
-
-    public float healthIncreaseRate, healthDecreaseRate;
-    
-    public float catchDistance;
+    public float m_speed, staticIncreaseRate, staticDecreaseRate, soundIncreaseRate, soundDecreaseRate, healthIncreaseRate, healthDecreaseRate, catchDistance;
 
     public float playerHealth = 100;
 
     public Slider healthSlider;
 
-    // public GameObject player;
+    public GameObject player;
 
     public Transform slenderMainTransform, playerTransform;
 
-    public GameObject jumpscareCam;
-    
-    public GameObject blackscreen;
+    public GameObject jumpscareCam, blackscreen;
 
     Vector3 dest;
 
@@ -42,17 +32,11 @@ public class SlenderAIAgro : MonoBehaviour
 
     int token, token3, token4;
 
-    public bool usingHealthSlider;
-
-    public bool enableCursorAfterDeath;
+    public bool usingHealthSlider, enableCursorAfterDeath;
     
     public string scenename;
 
-    float aiDistance;
-
-    float staticAmount;
-
-    float staticVolume;
+    float aiDistance, staticAmount, staticVolume;
 
     public List<Transform> teleportDestinations;
 
@@ -62,14 +46,13 @@ public class SlenderAIAgro : MonoBehaviour
 
     public Color staticOpacity;
 
-    public AudioSource staticSound;
-
-    public AudioSource jumpscareSound;
+    public AudioSource staticSound, jumpscareSound;
 
     public Camera playerCam;
     public GameObject slender2;
     public Animator slenderAnim;
     public bool attackRunning = false;
+    public Target target;
 
 
     void Start()
@@ -192,8 +175,15 @@ public class SlenderAIAgro : MonoBehaviour
         }
         if (aiDistance <= catchDistance)
         {
-            if(!attackRunning)
-                StartCoroutine(AttackPlayer0());
+            if(!attackRunning){
+                if(Random.Range(0, 2) == 0){
+                    StartCoroutine(AttackPlayer0());
+                }
+                else
+                {
+                    StartCoroutine(AttackPlayer1());
+                }
+            }
 
 
             // slenderAnim.Play("Attack 0");
@@ -208,20 +198,44 @@ public class SlenderAIAgro : MonoBehaviour
             // }
         }
     }
+    IEnumerator AttackPlayer1(){
+        attackRunning = true;
+        ai.enabled = false;
+        // ai.speed = 0;
+        slenderAnim.Play("Attack 1");
+        jumpscareSound.Play();
+        yield return new WaitForSeconds(2.5f);
+        if (Vector3.Distance(transform.position, playerTransform.position) <= catchDistance)
+        {
+            playerHealth -= 15;
+            // playerTransform.position -= playerTransform.forward * 0.1f;
+            // playerTransform.position += playerTransform.up * 0.5f;
+            // playerRb.AddForce(-playerTransform.forward * 1000);
+            // playerRb.AddForce(playerTransform.up * 1000);
+
+        }
+        ai.enabled = true;
+        ai.speed = m_speed;
+        attackRunning = false;
+    }
     IEnumerator AttackPlayer0()
     {
         attackRunning = true;
         ai.enabled = false;
         // ai.speed = 0;
         slenderAnim.Play("Attack 0");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         if (Vector3.Distance(transform.position, playerTransform.position) <= catchDistance)
         {
-            playerHealth -= 10;
+            playerHealth -= 20;
+            target.Knockback(-player.transform.forward, 0.3f);
+            target.Knockback(player.transform.up, 2f);
             // playerTransform.position -= playerTransform.forward * 0.1f;
             // playerTransform.position += playerTransform.up * 0.5f;
             // playerRb.AddForce(-playerTransform.forward * 1000);
             // playerRb.AddForce(playerTransform.up * 1000);
+            // player.transform.position -= player.transform.forward * 0.1f;
+
 
         }
         ai.enabled = true;
