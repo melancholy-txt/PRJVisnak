@@ -1,12 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunScript : MonoBehaviour
 {
     //vlastnosti zbrane
     public float damage, timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
-    int bulletsLeft, bulletsShot;
+    int bulletsLeft, bulletsShot, currentMagazineSize = 80;
 
     //bools 
     bool shooting, readyToShoot, reloading;
@@ -17,11 +19,14 @@ public class GunScript : MonoBehaviour
     public GameObject impactEffectSurface, impactEffectEnemy, player;
     public AudioSource shootSound, reloadSound, cockingSound;
 
+    public Text ammoDisplay;
+
 
      private void Awake()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        ammoDisplay.text = bulletsLeft / bulletsPerTap+ "/" + currentMagazineSize / bulletsPerTap ;
     }
     void Update()
     {
@@ -81,7 +86,7 @@ public class GunScript : MonoBehaviour
         // player.transform.position += player.transform.up * 0.5f;
 
 
-
+        ammoDisplay.text = bulletsLeft/bulletsPerTap + "/" + currentMagazineSize/bulletsPerTap;
         
     }
 
@@ -91,13 +96,33 @@ public class GunScript : MonoBehaviour
     }
     private void Reload()
     {
-        reloading = true;
-        reloadSound.Play();
-        Invoke(nameof(ReloadFinished), reloadTime);
+        if(currentMagazineSize >= magazineSize){
+            reloading = true;
+            reloadSound.Play();
+            Invoke(nameof(ReloadFinished), reloadTime);
+        }
+        else
+        {
+            StartCoroutine(AmmoDisplayFlash());         
+        }
     }
+
+    private IEnumerator AmmoDisplayFlash()
+    {
+        ammoDisplay.text = "Out of Ammo";
+        ammoDisplay.color = Color.red;
+        yield return new WaitForSeconds(1);
+        ammoDisplay.text = "0/0";
+        ammoDisplay.color = Color.white;
+        
+    }
+
     private void ReloadFinished()
     {
         bulletsLeft = magazineSize;
         reloading = false;
+        currentMagazineSize -= magazineSize;
+        ammoDisplay.text = bulletsLeft/bulletsPerTap + "/" + currentMagazineSize/bulletsPerTap;
+        
     }
 }
