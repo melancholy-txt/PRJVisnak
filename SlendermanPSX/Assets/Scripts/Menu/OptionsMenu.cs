@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     public Slider volumeSlider, sensitivitySlider, fovSlider;
-    public FPSController player;
+    // public FPSController player;
     public Camera playerCam;
 
     void Start()
@@ -17,6 +17,7 @@ public class OptionsMenu : MonoBehaviour
             PlayerPrefs.SetFloat("mouseSensitivity", 1.4f);
             PlayerPrefs.SetFloat("fieldOfView", 60);
             PlayerPrefs.SetInt("gameLaunched", 0);
+            PlayerPrefs.SetInt("aspectRatio", 0);
             PlayerPrefs.Save();
         }
         if (PlayerPrefs.HasKey("gameLaunched"))
@@ -25,7 +26,17 @@ public class OptionsMenu : MonoBehaviour
             AudioListener.volume = PlayerPrefs.GetFloat("masterVolume");
 
             sensitivitySlider.value = PlayerPrefs.GetFloat("mouseSensitivity");
-            player.lookSpeed = PlayerPrefs.GetFloat("mouseSensitivity");
+            // player.lookSpeed = PlayerPrefs.GetFloat("mouseSensitivity");
+
+            if (PlayerPrefs.GetInt("aspectRatio") == 0)
+            {
+                Screen.SetResolution(320, 240, true);
+            }
+            else if (PlayerPrefs.GetInt("aspectRatio") == 1)
+            {
+                Screen.SetResolution(320, 180, true);
+            }
+
 
             //fovSlider.value = PlayerPrefs.GetFloat("fieldOfView");
             //playerCam.fieldOfView = PlayerPrefs.GetFloat("fieldOfView");
@@ -44,10 +55,24 @@ public class OptionsMenu : MonoBehaviour
         PlayerPrefs.Save();
         AudioListener.volume = PlayerPrefs.GetFloat("masterVolume");
     }
-    public void SetSensitivity()
+    // public void SetSensitivity()
+    // {
+    //     PlayerPrefs.SetFloat("mouseSensitivity", sensitivitySlider.value);
+    //     PlayerPrefs.Save();
+    //     player.lookSpeed = PlayerPrefs.GetFloat("mouseSensitivity");
+    // }
+
+    public void SetFourByThree()
     {
-        PlayerPrefs.SetFloat("mouseSensitivity", sensitivitySlider.value);
+        PlayerPrefs.SetInt("aspectRatio", 0);
         PlayerPrefs.Save();
-        player.lookSpeed = PlayerPrefs.GetFloat("mouseSensitivity");
+         Screen.SetResolution(320, 240, true);
+    }
+
+    public void SetSixteenByNine()
+    {
+        PlayerPrefs.SetInt("aspectRatio", 1);
+        PlayerPrefs.Save();
+        Screen.SetResolution(320, 180, true);
     }
 }

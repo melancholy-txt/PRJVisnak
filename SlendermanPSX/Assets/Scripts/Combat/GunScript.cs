@@ -8,7 +8,8 @@ public class GunScript : MonoBehaviour
     //vlastnosti zbrane
     public float damage, timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
-    int bulletsLeft, bulletsShot, currentMagazineSize = 80;
+    int bulletsLeft, bulletsShot; 
+    public int currentMagazineSize = 80;
 
     //bools 
     bool shooting, readyToShoot, reloading;

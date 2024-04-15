@@ -4,15 +4,42 @@ using UnityEngine;
 
 public class PickUpAmmo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject intText;
+    public GunScript gunScript;
+    public AudioSource pickupSound;
+    public bool canInteract;
+    public int ammoValue = 20;
+
+    void OnTriggerStay(Collider other)
     {
-        
+        if (other.CompareTag("MainCamera"))
+        {
+            intText.SetActive(true);
+            canInteract = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("MainCamera"))
+        {
+            intText.SetActive(false);
+            canInteract = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (canInteract)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                gunScript.currentMagazineSize += ammoValue;
+                intText.SetActive(false);
+                gameObject.SetActive(false);
+                canInteract = false;
+            }
+        }
+    
     }
 }
