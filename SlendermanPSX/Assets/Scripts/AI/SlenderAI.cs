@@ -14,6 +14,7 @@ public class SlenderAI : MonoBehaviour
     public float m_speed, staticIncreaseRate, staticDecreaseRate, soundIncreaseRate, soundDecreaseRate, healthIncreaseRate, healthDecreaseRate, catchDistance, playerHealth = 100;
 
     public Slider healthSlider;
+    public Image sliderFill, medical;
 
     // public FPSController playerScript;
 
@@ -163,6 +164,7 @@ public class SlenderAI : MonoBehaviour
         if (usingHealthSlider == true)
         {
             healthSlider.value = playerHealth;
+            
         }
         staticSound.volume = staticVolume;
         staticOpacity.a = staticAmount;

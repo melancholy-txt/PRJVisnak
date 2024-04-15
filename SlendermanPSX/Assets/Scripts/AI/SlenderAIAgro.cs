@@ -17,6 +17,8 @@ public class SlenderAIAgro : MonoBehaviour
     public float playerHealth = 100;
 
     public Slider healthSlider;
+    public Image sliderFill, medical;
+
 
     public GameObject player;
 
@@ -145,6 +147,8 @@ public class SlenderAIAgro : MonoBehaviour
         if (usingHealthSlider == true)
         {
             healthSlider.value = playerHealth;
+            sliderFill.color = Color.Lerp(Color.red, Color.green, playerHealth / 100);
+            medical.color = Color.Lerp(Color.red, Color.green, playerHealth / 100);
         }
         staticSound.volume = staticVolume;
         staticOpacity.a = staticAmount;
@@ -173,7 +177,7 @@ public class SlenderAIAgro : MonoBehaviour
             ai.speed = 0;
             ai.SetDestination(transform.position);
         }
-        if (aiDistance <= catchDistance)
+        else if (aiDistance <= catchDistance)
         {
             if(!attackRunning){
                 if(Random.Range(0, 2) == 0){
