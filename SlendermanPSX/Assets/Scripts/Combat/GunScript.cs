@@ -53,17 +53,16 @@ public class GunScript : MonoBehaviour
         float x = UnityEngine.Random.Range(-spread, spread);
         float y = UnityEngine.Random.Range(-spread, spread);
 
-        //Calculate Direction with Spread
+        //Výpočet směru se zohledněním spreadu
         Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
         if (Physics.Raycast(fpsCam.transform.position, direction, out RaycastHit hit, range))
         {
             // Debug.Log(hit.transform.name);
             // Debug.DrawLine(fpsCam.transform.position, hit.point, Color.green, range);
-
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
+            if (hit.transform.TryGetComponent<Target>(out var target))
             {
                 target.TakeDamage(damage);
+                //instancializace efektu nárazu
                 Instantiate(impactEffectEnemy, hit.point, Quaternion.LookRotation(hit.normal));
             }
             else
@@ -82,11 +81,10 @@ public class GunScript : MonoBehaviour
             cockingSound.Play();
             Invoke(nameof(Shoot), timeBetweenShots);
         }
-        //push player back a small amount
+        //posunutí hráče při střelbě
         player.transform.position -= player.transform.forward * 0.1f;
-        // player.transform.position += player.transform.up * 0.5f;
 
-
+        //aktualizace textu
         ammoDisplay.text = bulletsLeft/bulletsPerTap + "/" + currentMagazineSize/bulletsPerTap;
         
     }
