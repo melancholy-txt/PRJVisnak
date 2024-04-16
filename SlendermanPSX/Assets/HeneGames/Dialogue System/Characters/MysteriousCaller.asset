@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4a308dae7ffd048a8b0eb8d5ae4a02, type: 3}
   m_Name: MysteriousCaller
   m_EditorClassIdentifier: 
-  characterPhoto: {fileID: 0}
-  characterName: 
+  characterPhoto: {fileID: 21300000, guid: fe5f02c872433dc439c74b705f293448, type: 3}
+  characterName: Mysterious Caller

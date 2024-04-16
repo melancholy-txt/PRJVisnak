@@ -34,7 +34,7 @@ public class PickUpAmmo : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                gunScript.currentMagazineSize += ammoValue;
+                gunScript.AddAmmo(ammoValue);
                 intText.SetActive(false);
                 gameObject.SetActive(false);
                 canInteract = false;

@@ -10,7 +10,7 @@ public class GunScript : MonoBehaviour
     public int magazineSize, bulletsPerTap;
     int bulletsLeft, bulletsShot; 
     public int currentMagazineSize = 80;
-
+    
     //bools 
     bool shooting, readyToShoot, reloading;
 
@@ -123,5 +123,11 @@ public class GunScript : MonoBehaviour
         currentMagazineSize -= magazineSize;
         ammoDisplay.text = bulletsLeft/bulletsPerTap + "/" + currentMagazineSize/bulletsPerTap;
         
+    }
+
+    internal void AddAmmo(int ammoValue)
+    {
+        currentMagazineSize += ammoValue;
+        ammoDisplay.text = bulletsLeft/bulletsPerTap + "/" + currentMagazineSize/bulletsPerTap;
     }
 }
