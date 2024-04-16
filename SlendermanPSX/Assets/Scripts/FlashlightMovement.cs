@@ -5,6 +5,16 @@ using UnityEngine;
 public class FlashlightMovement : MonoBehaviour
 {
     public Animator flashAnim;
+    public Light flashLight;
+    public AudioSource flashlightOn, flashlightOff;
+    private bool IsOn{
+        get{
+            return flashLight.enabled;
+        }
+        set{
+            flashLight.enabled = value;
+        }
+    }
 
     private void Update()
     {
@@ -19,6 +29,18 @@ public class FlashlightMovement : MonoBehaviour
             {
                 flashAnim.ResetTrigger("sprint");
                 flashAnim.SetTrigger("walk");
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            IsOn = !IsOn;
+            if (IsOn)
+            {
+                flashlightOn.Play();
+            }
+            else
+            {
+                flashlightOff.Play();
             }
         }
     }
