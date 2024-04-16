@@ -11,7 +11,7 @@ public class PickUpFlashligjt : MonoBehaviour
     {
         if (other.CompareTag("MainCamera"))
         {
-            // intText.SetActive(true);
+            intText.SetActive(true);
             canInteract = true;
         }
     }
@@ -19,7 +19,7 @@ public class PickUpFlashligjt : MonoBehaviour
     {
         if (other.CompareTag("MainCamera"))
         {
-            // intText.SetActive(false);
+            intText.SetActive(false);
             canInteract = false;
         }
     }
