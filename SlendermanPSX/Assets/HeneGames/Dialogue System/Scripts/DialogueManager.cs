@@ -7,6 +7,7 @@ namespace HeneGames.DialogueSystem
 {
     public class DialogueManager : MonoBehaviour
     {
+        public AudioSource phoneRing;
         private int currentSentence;
         private float coolDownTimer;
         private bool dialogueIsOn;
@@ -29,6 +30,11 @@ namespace HeneGames.DialogueSystem
         [Header("Dialogue")]
         [SerializeField] private TriggerState triggerState;
         [SerializeField] private List<NPC_Centence> sentences = new List<NPC_Centence>();
+
+        public void DestroySelf()
+        {
+            Destroy(gameObject);
+        }
 
         private void Update()
         {
@@ -115,6 +121,7 @@ namespace HeneGames.DialogueSystem
                 {
                     //Show interaction UI
                     DialogueUI.instance.ShowInteractionUI(true);
+                    phoneRing.Play();
 
                     //Store refenrece
                     dialogueTrigger = _trigger;
