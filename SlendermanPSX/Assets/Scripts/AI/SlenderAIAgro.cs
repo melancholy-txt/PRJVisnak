@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -24,7 +25,7 @@ public class SlenderAIAgro : MonoBehaviour
 
     public Transform slenderMainTransform, playerTransform;
 
-    public GameObject jumpscareCam, blackscreen, tryAgainText;
+    public GameObject jumpscareCam, blackscreen, tryAgainText, whiteScreen, succeedText;
 
     Vector3 dest;
 
@@ -55,7 +56,8 @@ public class SlenderAIAgro : MonoBehaviour
     public Animator slenderAnim;
     public bool attackRunning = false;
     public Target target;
-
+    public ParticleSystem deathExplosion;
+    public AudioSource endSound, endTalk;
 
     void Start()
     {
@@ -251,6 +253,48 @@ public class SlenderAIAgro : MonoBehaviour
 
     internal void Die()
     {
+        // ai.enabled = false;
+        // ai.speed = 0;
+        // catchDistance = -1;
+        // slenderMesh.enabled = false;
+        // slenderMesh.gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.transform.position = new Vector3(-1000, -1000, -1000);
         
+        Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        // gameObject.SetActive(false);
+        StartCoroutine(EndGame());
+    }
+
+    private IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(2f);
+        
+        endSound.Play();
+        endSound.volume = Mathf.Lerp(0, 1, 2f);
+
+        endTalk.Play();
+
+        whiteScreen.SetActive(true);
+        // while (whiteScreen.GetComponent<Image>().color.a < 1)
+        // {
+        //     whiteScreen.GetComponent<Image>().color = Color.Lerp(whiteScreen.GetComponent<Image>().color, new Color(1, 1, 1, 1), 4f * Time.deltaTime);
+        //     yield return null;
+        // }
+        // whiteScreen.GetComponent<Animator>().SetTrigger("FadeIn");
+        whiteScreen.GetComponent<Image>().color = Color.Lerp(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 4f);
+
+        succeedText.SetActive(true);
+        // while (succeedText.GetComponent<Image>().color.a < 1)
+        // {
+        //     succeedText.GetComponent<Image>().color = Color.Lerp(succeedText.GetComponent<Image>().color, new Color(1, 1, 1, 1), 4f * Time.deltaTime);
+        //     yield return null;
+        // }
+        // succeedText.GetComponent<Animator>().SetTrigger("FadeIn");
+        // succeedText.GetComponent<Image>().color = Color.Lerp(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 4f);
+
+        yield return new WaitForSeconds(4f);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("Menu");
     }
 }
