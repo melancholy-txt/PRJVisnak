@@ -108,7 +108,7 @@ public class SlenderAI : MonoBehaviour
                 token3 = 0;
                 if (token4 == 0)
                 {
-                    randNum2 = Random.Range(0, 2);
+                    randNum2 = Random.Range(0, 4);
                     if (randNum2 == 0)
                     {
                         jumpscareSound.Play();

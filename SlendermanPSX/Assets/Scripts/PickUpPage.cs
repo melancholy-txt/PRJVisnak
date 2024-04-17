@@ -46,8 +46,9 @@ public class PickUpPage : MonoBehaviour
                         break;
                     case 1: 
                         ambienceLayer1.Play(); 
-                        slender1.SetActive(false);
-                        slender2.SetActive(true);
+                        slender1.SetActive(true);
+                        // slender1.SetActive(false);
+                        // slender2.SetActive(true);
                         break;
                     case 2: ambienceLayer2.Play(); break;
                     case 3: ambienceLayer3.Play(); break;

@@ -221,7 +221,7 @@ namespace HeneGames.DialogueSystem
                 StopDialogue();
 
                 lastSentence = true;
-
+                DestroySelf();
                 return;
             }
 
@@ -243,7 +243,7 @@ namespace HeneGames.DialogueSystem
             //Stop dialogue event
             if (dialogueTrigger != null)
             {
-                dialogueTrigger.endDialogueEvent.Invoke();
+                // dialogueTrigger.endDialogueEvent.Invoke();
             }
 
             endDialogueEvent.Invoke();
