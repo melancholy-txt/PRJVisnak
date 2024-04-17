@@ -81,8 +81,9 @@ public class SlenderAI : MonoBehaviour
 
     IEnumerator KillPlayer()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
         blackscreen.SetActive(true);
+
         // AudioListener.pause = true;
         // DontDestroyOnLoad(playerCam.gameObject);
         // yield return new WaitForSeconds(1f);

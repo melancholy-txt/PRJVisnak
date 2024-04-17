@@ -11604,7 +11604,7 @@ GameObject:
   - component: {fileID: 859596447}
   - component: {fileID: 859596449}
   m_Layer: 5
-  m_Name: Intro
+  m_Name: TryAgain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11662,10 +11662,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'collect   all   8   pages
-
-
-    and            the  slenderman'
+  m_Text: try again.
 --- !u!222 &859596448
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14356,6 +14353,7 @@ MonoBehaviour:
   playerTransform: {fileID: 981443587}
   jumpscareCam: {fileID: 1502000739}
   blackscreen: {fileID: 173699289}
+  tryAgainText: {fileID: 859596445}
   usingHealthSlider: 1
   enableCursorAfterDeath: 1
   scenename: Menu
@@ -26871,7 +26869,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 859596446}
   - {fileID: 133807629}
   - {fileID: 959454604}
   - {fileID: 1521593804}
@@ -26879,10 +26876,11 @@ RectTransform:
   - {fileID: 1199469809}
   - {fileID: 1036560034}
   - {fileID: 1548284405}
-  - {fileID: 173699290}
   - {fileID: 1634764628}
   - {fileID: 162976404}
   - {fileID: 707268434}
+  - {fileID: 173699290}
+  - {fileID: 859596446}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

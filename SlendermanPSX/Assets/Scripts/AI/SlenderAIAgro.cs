@@ -24,7 +24,7 @@ public class SlenderAIAgro : MonoBehaviour
 
     public Transform slenderMainTransform, playerTransform;
 
-    public GameObject jumpscareCam, blackscreen;
+    public GameObject jumpscareCam, blackscreen, tryAgainText;
 
     Vector3 dest;
 
@@ -77,10 +77,12 @@ public class SlenderAIAgro : MonoBehaviour
 
     IEnumerator KillPlayer()
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(2.5f);
         blackscreen.SetActive(true);
-        AudioListener.pause = true;
-        yield return new WaitForSeconds(6f);
+        tryAgainText.SetActive(true);
+
+        // AudioListener.pause = true;
+        yield return new WaitForSeconds(2f);
         if (enableCursorAfterDeath == true)
         {
             Cursor.visible = true;
@@ -247,5 +249,8 @@ public class SlenderAIAgro : MonoBehaviour
         attackRunning = false;
     }
 
-
+    internal void Die()
+    {
+        
+    }
 }

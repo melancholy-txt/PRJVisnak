@@ -19,7 +19,11 @@ public class Target : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        if (TryGetComponent<SlenderAIAgro>(out var aiAgro))
+        {
+            aiAgro.Die();
+        }
+        // Destroy(gameObject);
     }
 
     public void Knockback(Vector3 direction, float force)
