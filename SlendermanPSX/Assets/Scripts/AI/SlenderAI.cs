@@ -60,7 +60,9 @@ public class SlenderAI : MonoBehaviour
 
     void Start()
     {
-        AudioListener.pause = false; 
+        //log audio listener
+        Debug.Log("Audio Listener: " + AudioListener.pause);
+        // AudioListener.pause = false; 
         // playerScript = GameObject.Find("Player").GetComponent<FPSController>();
         // playerHealth = playerScript.playerHealth;
         // playerHealth = player.GetComponent<FPSController>().playerHealth;
@@ -81,8 +83,9 @@ public class SlenderAI : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         blackscreen.SetActive(true);
-        AudioListener.pause = true;
-        yield return new WaitForSeconds(1f);
+        // AudioListener.pause = true;
+        // DontDestroyOnLoad(playerCam.gameObject);
+        // yield return new WaitForSeconds(1f);
         if (enableCursorAfterDeath == true)
         {
             Cursor.visible = true;
