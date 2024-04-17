@@ -134,8 +134,8 @@ public class SlenderAI : MonoBehaviour
         {
             ai.speed = m_speed;
             ai.enabled = true;
-            slenderAnim.ResetTrigger("idle");
-            slenderAnim.SetTrigger("moving");
+            // slenderAnim.ResetTrigger("idle");
+            // slenderAnim.SetTrigger("moving");
             if (token3 == 0)
             {
                 ResetSlender();
