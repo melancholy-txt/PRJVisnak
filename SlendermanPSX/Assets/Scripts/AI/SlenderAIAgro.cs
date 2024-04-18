@@ -56,11 +56,12 @@ public class SlenderAIAgro : MonoBehaviour
     public bool attackRunning = false;
     public Target target;
     public ParticleSystem deathExplosion;
-    public AudioSource endSound, endTalk;
+    public AudioSource endSound, endTalk, bossMusic;
 
     void Start()
     {
         AudioListener.pause = false; 
+        bossMusic.gameObject.SetActive(true);
         // playerHealth = player.GetComponent<FPSController>().playerHealth;
         // player.SetActive(true);
 
@@ -252,6 +253,8 @@ public class SlenderAIAgro : MonoBehaviour
 
     internal void Die()
     {
+        bossMusic.gameObject.SetActive(false);
+
         // ai.enabled = false;
         // ai.speed = 0;
         // catchDistance = -1;
